@@ -88,6 +88,18 @@ npm run lint
 - Metadata is **local file storage** (`data/videos.json`), not a real database
 - There is no authentication / per-user video ownership in this version
 
+## Disclaimer
+
+This project is provided **as-is**. You may use, copy, modify, or deploy it according to the terms of this repository’s **license** (if one is present) and applicable law.
+
+**The author(s) and contributors accept no responsibility** for how this software is used by anyone, anywhere—including commercial, personal, educational, or any other use.
+
+**You are solely responsible** for your deployment, your content, your users, and for complying with all laws and regulations that apply to you (including copyright, privacy, data protection, and rules against illegal or harmful activity). **No warranty** is given that this project is fit for any particular purpose, secure, or free of defects.
+
+If you use this project in a way that is **illegal, unethical, or harmful**, that is entirely **your responsibility**—not the author’s.
+
+This software if free to use with no license but the above two lines are to be **kept in notice**
+
 ## Deploy
 
 This is a standard Next.js app. See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
