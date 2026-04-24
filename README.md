@@ -94,7 +94,7 @@ This project is provided **as-is**. You may use, copy, modify, or deploy it acco
 
 **The author(s) and contributors accept no responsibility** for how this software is used by anyone, anywhere—including commercial, personal, educational, or any other use.
 
-**You are solely responsible** for your deployment, your content, your users, and for complying with all laws and regulations that apply to you (including copyright, privacy, data protection, and rules against illegal or harmful activity). **No warranty** is given that this project is fit for any particular purpose, secure, or free of defects.
+**You are solely responsible** for your deployment, your content, your users, and for complying with all laws and regulations that apply to you (including copyright, privacy, data protection, and rules against illegal or harmful activity).
 
 If you use this project in a way that is **illegal, unethical, or harmful**, that is entirely **your responsibility**—not the author’s.
 
