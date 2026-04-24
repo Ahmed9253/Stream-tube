@@ -4,6 +4,7 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 2rem 1.5rem;
+  margin-inline: auto;
   margin-bottom: 2.25rem;
   max-width: 760px;
 }
