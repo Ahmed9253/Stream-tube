@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StreamTube (Online Video Player + Uploads)
 
-## Getting Started
+A **Next.js online video site** where you can **upload videos** and then **play them in the in-app player**. Optional **thumbnail** + **watermark** uploads are supported, and media delivery/playback is powered by **ImageKit**.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) + React 19 + TypeScript + ImageKit + local JSON metadata in `data/videos.json` (a simple demo “database”).
+
+## Features
+
+- Browse a **video library** on the home page
+- **Upload** a video (required) and optional **thumbnail** + **watermark**
+- **Watch** a video on `/watch/[id]`
+- Player includes an adjustable **quality** input (1–100) and optional watermark transform when configured
+- **Persist video metadata** locally in `data/videos.json`
+
+## Project structure (where things live)
+
+- `src/app/page.tsx` — home library
+- `src/app/upload/page.tsx` — upload UI
+- `src/app/watch/[id]/page.tsx` — watch page
+- `src/components/video/*` — library, upload, player UI
+- `src/app/api/*` — JSON API routes + ImageKit upload auth
+- `src/lib/video-storage.ts` — read/write `data/videos.json`
+- `data/videos.json` — local video metadata
+
+## Environment variables
+
+Copy `.env.example` to `.env` and fill in your values:
+
+- **Never commit real secrets.**
+- If keys were ever shared publicly, **rotate** them in the ImageKit dashboard.
+
+### Required
+
+```env
+# Public ImageKit base URL (safe to expose to the browser)
+NEXT_PUBLIC_IMAGEKIT_URL=https://ik.imagekit.io/<your_imagekit_id>
+
+# Server-only ImageKit API keys
+IMAGEKIT_PUBLIC_KEY=public_xxxxxxxxxxxxxxxxx
+IMAGEKIT_PRIVATE_KEY=private_xxxxxxxxxxxxxxxxx
+```
+
+### How they’re used in this app
+
+- `NEXT_PUBLIC_IMAGEKIT_URL` is used for ImageKit image/video components (library + player) via `ImageKitProvider` in `src/app/layout.tsx`, and the watch page passes the endpoint into the player.
+- `IMAGEKIT_PUBLIC_KEY` + `IMAGEKIT_PRIVATE_KEY` are used only on the server in `src/app/api/upload-auth/route.ts` to generate **temporary upload authentication** for the browser uploader in `src/components/video/VideoUpload.tsx`.
+
+**Note:** You can also use Next.js `.env.local` for local development secrets, but the repo is commonly configured with a root `.env` file.
+
+## Run locally
+
+### Install
+
+```bash
+npm install
+```
+
+### Develop
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build + start (production)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Lint
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API routes (reference)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `GET /api/videos` — list videos
+- `POST /api/videos` — create video metadata
+- `GET /api/videos/[id]` — fetch a video
+- `GET /api/upload-auth` — ImageKit upload auth parameters
 
-## Deploy on Vercel
+## Notes / limitations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Metadata is **local file storage** (`data/videos.json`), not a real database
+- There is no authentication / per-user video ownership in this version
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+This is a standard Next.js app. See the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## Boilerplate
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
